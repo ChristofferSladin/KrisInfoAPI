@@ -12,10 +12,9 @@ namespace KrisInfoAPI.Pages
 {
     public class CardModel
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string Country { get; set; }
+        public int Identifier { get; set; }
+        public string Headline { get; set; }
+        public string BodyText { get; set; }
     }
 
     public class MessageCardModel : PageModel
@@ -52,14 +51,13 @@ namespace KrisInfoAPI.Pages
                     {
                         card = new CardModel
                         {
-                            Id = message.Id,
-                            Title = message.Title,
-                            Description = message.Description,
-                            Country = message.Country
+                            Identifier = message.Identifier,
+                            Headline = message.Headline,
+                            BodyText = message.BodyText,
                         };
 
                         // Use the card object as needed
-                        Console.WriteLine($"Id: {card.Id}, Title: {card.Title}, Description: {card.Description}, Country: {card.Country}");
+                        Console.WriteLine($"Id: {card.Identifier}, Title: {card.Headline}, Description: {card.BodyText}");
                     }
                     Console.WriteLine("Tryck valfri knapp för att fortsätta");
                     Console.ReadLine();
