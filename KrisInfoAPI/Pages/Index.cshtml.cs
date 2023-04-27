@@ -14,7 +14,7 @@ namespace KrisInfoAPI.Pages
             _logger = logger;
         }
 
-        public List<KrisInfoVM> KrisLista { get; set; } = new List<KrisInfoVM>();
+        public List<KrisInfoVM> KrisLista { get; set; }
 
 
         public async Task GetJsonDataAll()
@@ -38,7 +38,7 @@ namespace KrisInfoAPI.Pages
             }
         }
 
-        public async void OnGet()
+        public async Task OnGet()
         {
            await GetJsonDataAll();
         }
