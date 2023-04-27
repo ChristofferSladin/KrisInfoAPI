@@ -14,7 +14,7 @@ namespace KrisInfoAPI.Pages
             _logger = logger;
         }
 
-        public List<KrisInfoVM> KrisLista { get; set; }
+        public List<KrisInfoVM> KrisLista { get; set; } = new List<KrisInfoVM>();
 
 
         public async Task GetJsonDataAll()
@@ -31,17 +31,10 @@ namespace KrisInfoAPI.Pages
             {
                 // Gör om responsen till en sträng
                 var responseBody = await response.Content.ReadAsStringAsync();
-                try
-                {
                     // Gör om strängen till vår egen skapade datatyp - KrisInfoResponse
                     var messages = JsonConvert.DeserializeObject<List<KrisInfoVM>>(responseBody);
 
                     KrisLista = messages;
-
-                }
-                catch (JsonReaderException)
-                {
-                }
             }
         }
 
