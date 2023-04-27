@@ -38,9 +38,9 @@ namespace KrisInfoAPI.Pages
             }
         }
 
-        public void OnGet()
+        public async void OnGet()
         {
-            GetJsonDataAll();
+           await GetJsonDataAll();
         }
     }
 }
