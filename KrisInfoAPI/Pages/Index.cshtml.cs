@@ -15,6 +15,8 @@ namespace KrisInfoAPI.Pages
         }
 
         public List<KrisInfoVM> KrisLista { get; set; }
+
+
         public async Task GetJsonDataAll()
         {
             // Max siffra = 73! Vet inte varför!
@@ -39,14 +41,13 @@ namespace KrisInfoAPI.Pages
                 }
                 catch (JsonReaderException)
                 {
-
                 }
             }
         }
 
         public void OnGet()
         {
-           
+            GetJsonDataAll();
         }
     }
 }
