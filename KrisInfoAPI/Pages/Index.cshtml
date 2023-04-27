@@ -3,8 +3,26 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Rubrik</th>
+            <th>Published</th>
+            <th>Country</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.KrisLista)
+        {
+            <tr>
+                <td>@item.Identifier</td>
+                <td>@item.PushMessage</td>
+                <td>@item.Published.ToString("yyyy-MM-dd")</td>
+                <td>@item.Area[0].Description</td>
+                <td><button class="read-more">Läs mer</button></td>
+            </tr>
+        }
+    </tbody>
+</table>

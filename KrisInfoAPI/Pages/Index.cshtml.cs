@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace KrisInfoAPI.Pages
 {
@@ -12,9 +14,33 @@ namespace KrisInfoAPI.Pages
             _logger = logger;
         }
 
-        public void OnGet()
-        {
+        public List<KrisInfoVM> KrisLista { get; set; }
 
+
+        public async Task GetJsonDataAll()
+        {
+            // Max siffra = 73! Vet inte varför!
+            var days = 30;
+            using var client = new HttpClient();
+            client.BaseAddress = new Uri("https://api.krisinformation.se");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = await client.GetAsync($"/v3/news?days={days}");
+            if (response.IsSuccessStatusCode)
+            {
+                // Gör om responsen till en sträng
+                var responseBody = await response.Content.ReadAsStringAsync();
+                    // Gör om strängen till vår egen skapade datatyp - KrisInfoResponse
+                    var messages = JsonConvert.DeserializeObject<List<KrisInfoVM>>(responseBody);
+
+                    KrisLista = messages;
+            }
+        }
+
+        public async Task OnGet()
+        {
+           await GetJsonDataAll();
         }
     }
 }
